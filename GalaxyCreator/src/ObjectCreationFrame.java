@@ -5,21 +5,29 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 public abstract class ObjectCreationFrame extends JFrame  
 {
-	JSlider mass;
-	JSlider radius;
-	JSlider speed;
+	JTextField mass;
+	JTextField radius;
+	JTextField speed;
+	JTextField massex;
+	JTextField radiusex;
+	JTextField speedex;
 	JLabel massL;
 	JLabel radiusL;
 	JLabel speedL;
+	JLabel powSpeed;
+	JLabel powMass;
+	JLabel powRadius;
 	JButton create;
 	JPanel panel;
-	int curMass = 0;
-	int curRadius = 0;
-	int curSpeed = 0;
+	float curMass = 0;
+	float curRadius = 0;
+	float curSpeed = 0;
 	
 	ArrayList<SpaceObject> obj;
 	

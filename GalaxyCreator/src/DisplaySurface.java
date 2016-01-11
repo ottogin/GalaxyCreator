@@ -1,43 +1,47 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
 
-public class Frame extends JFrame 
-{
-	
+
+public class DisplaySurface extends JFrame {
 	JButton planetBtn;
-	JButton starBtn;
 	JToolBar toolBar;
 	JPanel panel;
 	ObjectCreationFrame planetFrm;
 	ObjectCreationFrame starFrm;
 	
-	Space space;
+	public static Space space;
 	
-	public Frame ()
+	public DisplaySurface() 
 	{
+		initUI();
+	}
 
-		setTitle("Galaxy Creator");
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		planetBtn = new JButton ("Создать планету");
-		starBtn = new JButton ("Создать звезду");
+	private void initUI() 
+	{
 		panel = new JPanel();
+		space = new Space(500, 500); 
+		panel.add(new Surface(space));
+		setLocation(0, 0);
+		setTitle("Galaxy Creator");
+		//setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		planetBtn = new JButton ("+");
+		
 		ButtonInitialize();
-		space = new Space(500, 500);
-		pack();
+		
 	}
 	
 	private void ButtonInitialize()
 	{
 		panel.add(planetBtn);
-		panel.add(starBtn);
 		setContentPane(panel);
 		pack();
-		
 	}
 	
 	public void ButtonListener()
@@ -87,5 +91,4 @@ public class Frame extends JFrame
 		
 		
 	}
-	
 }
