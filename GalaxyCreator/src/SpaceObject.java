@@ -8,35 +8,38 @@ import System.Vector2;
 
 public class SpaceObject 
 {
-	float mass;
-	float radius;
-	float speed;
+	double mass;
+	double radius;
 	Vector2 pos;
 	Vector2 speedVector;
-	private Image img;
+	Vector2 forceVector;
+	Vector2 acceleration;
 	
-	public float getMass() {
+	int ImageNumber;
+	Image img;
+	
+	public double getMass() {
 		return mass;
 	}
 
-	public void setMass(float mass) {
+	public void setMass(double mass) {
 		this.mass = mass;
 	}
 
-	public float getRadius() {
+	public double getRadius() {
 		return radius;
 	}
 
-	public void setRadius(float radius) {
+	public void setRadius(double radius) {
 		this.radius = radius;
 	}
 
-	public float getSpeed() {
-		return speed;
+	public Vector2 getSpeed() {
+		return speedVector;
 	}
 
-	public void setSpeed(float speed) {
-		this.speed = speed;
+	public void setSpeed(Vector2 speedVector) {
+		this.speedVector = speedVector;
 	}
 
 	public Vector2 getPos() {
@@ -46,29 +49,70 @@ public class SpaceObject
 	public void setPos(Vector2 pos) {
 		this.pos = pos;
 	}
-
-	public Vector2 getSpeedVector() {
-		return speedVector;
+	
+	public void setForce(Vector2 force)
+	{
+		this.forceVector = force;
+	}
+	
+	public Vector2 getForce() { return forceVector;}
+	
+	public void setImageNumber (int num)
+	{
+		this.ImageNumber = num;
+	}
+	
+	public void updateForce (double dfx, double dfy)
+	{
+		double Fx = forceVector.x;
+		double Fy = forceVector.y;
+		forceVector.SetValue(Fx + dfx, Fy + dfy);
+	}
+	
+	public void updateAcceleration (double dax, double day)
+	{
+		double Ax = acceleration.x;
+		double Ay = acceleration.y;
+		forceVector.SetValue(Ax + dax, Ay + day);
+	}
+	
+	public void updateSpeed (double dVx, double dVy)
+	{
+		double Vx = speedVector.x;
+		double Vy = speedVector.y;
+		forceVector.SetValue(Vx + dVx, Vy + dVy);
+	}
+	
+	public void updateCoord (double dx, double dy)
+	{
+		double x = pos.x;
+		double y = pos.y;
+		pos.SetValue(x + dx, y + dy);
+	}
+	
+	public void setAcceleration (Vector2 acceleration)
+	{
+		this.acceleration = acceleration;
+	}
+	
+	public Vector2 getAcceleration ()
+	{
+		return acceleration;
 	}
 
-	public void setSpeedVector(Vector2 speedVector) {
-		this.speedVector = speedVector;
-	}
-
-	public SpaceObject(float mass, float radius, float speed)
+	public SpaceObject(double mass, double radius, Vector2 speedVector, Vector2 pos)
 	{
 		this.mass = mass;
 		this.radius = radius;
-		this.speed = speed;
-		pos = new Vector2();
-		pos.SetValue(400,  325);
+		this.speedVector = speedVector;
+		this.pos = pos;
+		
+		forceVector = new Vector2();
+		forceVector.SetZero();
+		acceleration = new Vector2();
+		acceleration.SetZero();
+		
 		img = new ImageIcon("Earth.png").getImage();
-	}
-	
-	public void move(int dx, int dy)
-	{
-		pos.x += dx;
-		pos.y += dy;
 	}
 	
 	public void Draw(Graphics2D g, Surface s)

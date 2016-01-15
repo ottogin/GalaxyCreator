@@ -10,11 +10,15 @@ public class Space
 	int width;
 	int height;
 	
+	PhysicsControl control;
+	
 	public Space(int width, int height)
 	{
 		objects = new ArrayList<>();
 		this.width = width;
 		this.height = height;
+		
+		control = new PhysicsControl (objects);
 	}
 	
 	public ArrayList<SpaceObject> getObjects() { return objects; }
@@ -25,10 +29,7 @@ public class Space
 	
 	public void Update() 
 	{
-		for(int i = 0; i <  objects.size(); i++)
-		{
-			objects.get(i).move(3, 0);
-		}
+		control.calcPhysics();
 	}
 	
 	public void Draw(Graphics2D g, Surface s)

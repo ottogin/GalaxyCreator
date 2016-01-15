@@ -13,21 +13,32 @@ public abstract class ObjectCreationFrame extends JFrame
 {
 	JTextField mass;
 	JTextField radius;
-	JTextField speed;
 	JTextField massex;
 	JTextField radiusex;
-	JTextField speedex;
+	JTextField speedX;
+	JTextField speedY;
+	JTextField speedexX;
+	JTextField speedexY;
+	JTextField X;
+	JTextField Y;
 	JLabel massL;
 	JLabel radiusL;
-	JLabel speedL;
-	JLabel powSpeed;
+	JLabel speedLX;
+	JLabel speedLY;
+	JLabel powSpeedX;
+	JLabel powSpeedY;
 	JLabel powMass;
 	JLabel powRadius;
+	JLabel XL;
+	JLabel YL;
 	JButton create;
 	JPanel panel;
-	float curMass = 0;
-	float curRadius = 0;
-	float curSpeed = 0;
+	double curMass = 0;
+	double curRadius = 0;
+	double curSpeedX = 0;
+	double curSpeedY = 0;
+	double curX = 0;
+	double curY = 0;
 	
 	ArrayList<SpaceObject> obj;
 	

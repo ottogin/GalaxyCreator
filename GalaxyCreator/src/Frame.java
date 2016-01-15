@@ -9,7 +9,6 @@ public class Frame extends JFrame
 {
 	
 	JButton planetBtn;
-	JButton starBtn;
 	JToolBar toolBar;
 	JPanel panel;
 	ObjectCreationFrame planetFrm;
@@ -24,7 +23,6 @@ public class Frame extends JFrame
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		planetBtn = new JButton ("Создать планету");
-		starBtn = new JButton ("Создать звезду");
 		panel = new JPanel();
 		ButtonInitialize();
 		space = new Space(500, 500);
@@ -34,7 +32,6 @@ public class Frame extends JFrame
 	private void ButtonInitialize()
 	{
 		panel.add(planetBtn);
-		panel.add(starBtn);
 		setContentPane(panel);
 		pack();
 		

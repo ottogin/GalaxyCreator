@@ -2,11 +2,11 @@ package System;
 
 public class Vector2
 {
-    public float x;
-    public float y;
+    public double x;
+    public double y;
 
 
-    public Vector2(float x, float y)
+    public Vector2(double x, double y)
     {
         this.x = x;
         this.y = y;
@@ -40,7 +40,7 @@ public class Vector2
 
     public void Normalize()
     {
-        float length = (float)Math.sqrt(x*x + y*y);
+        double length = (double)Math.sqrt(x*x + y*y);
         x /= length;
         y /= length;
     }
@@ -51,7 +51,7 @@ public class Vector2
         y = sourceVector.y;
     }
 
-    public void SetValue(float x, float y)
+    public void SetValue(double x, double y)
     {
         this.x = x;
         this.y = y;

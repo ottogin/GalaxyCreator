@@ -41,9 +41,14 @@ class Surface extends JPanel implements ActionListener {
 	private void setSurfaceSize() {
 
 		Dimension d = new Dimension();
-		d.width = 1300;
+		d.width = 1000;
 		d.height = 680;
 		setPreferredSize(d);
+	}
+	
+	public void setSpace(Space space)
+	{
+		this.space = space;
 	}
 
 	private void doDrawing(Graphics g) {
@@ -60,8 +65,8 @@ class Surface extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
-	
+	public void paintComponent(Graphics g) 
+	{
 		super.paintComponent(g);
 		doDrawing(g);
 	}
