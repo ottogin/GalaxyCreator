@@ -41,8 +41,8 @@ class Surface extends JPanel implements ActionListener {
 	private void setSurfaceSize() {
 
 		Dimension d = new Dimension();
-		d.width = 1000;
-		d.height = 680;
+		d.width = 1200;
+		d.height = 690;
 		setPreferredSize(d);
 	}
 	
@@ -74,8 +74,7 @@ class Surface extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		space.Update();
-		repaint();
-		
+		repaint();		
 	}
 }
 

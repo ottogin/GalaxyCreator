@@ -22,7 +22,7 @@ public class Frame extends JFrame
 		setTitle("Galaxy Creator");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		planetBtn = new JButton ("Создать планету");
+		planetBtn = new JButton ("GalaxyCreator");
 		panel = new JPanel();
 		ButtonInitialize();
 		space = new Space(500, 500);

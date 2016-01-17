@@ -70,6 +70,10 @@ public class Vector2
             return x < 0 || y < 0;
     }
 
+    public double Distance(Vector2 a){
+    	return Math.sqrt((a.x - x) * (a.x - x) + (a.y - y) * (a.y - y));
+    }
+    
     public void ChangeSign()
     {
         x = -x;

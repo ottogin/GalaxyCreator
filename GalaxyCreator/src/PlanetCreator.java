@@ -17,7 +17,7 @@ public class PlanetCreator extends ObjectCreationFrame {
 	
 	public PlanetCreator(ArrayList<SpaceObject> obj)
 	{
-		super(" планеты");
+		super(" Creator");
 		this.obj = obj;
 		ButtonInitialize();
 	}
@@ -28,61 +28,61 @@ public class PlanetCreator extends ObjectCreationFrame {
 	{
 		massL = new JLabel ("Mass");
 		panel.add(massL);
-		mass = new JTextField("", 10);
+		mass = new JTextField("5.9726", 10);
 		mass.setCaretColor(Color.RED);
 		mass.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(mass);
 		powMass = new JLabel ("*10^");
 		panel.add(powMass);
-		massex = new JTextField("", 10);
+		massex = new JTextField("24", 10);
 		massex.setCaretColor(Color.RED);
 		massex.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(massex);
 		radiusL = new JLabel("Radius");
 		panel.add(radiusL);
-		radius = new JTextField("", 10);
+		radius = new JTextField("2", 10);
 		radius.setCaretColor(Color.RED);
 		radius.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(radius);
 		powRadius = new JLabel ("*10^");
 		panel.add(powRadius);
-		radiusex = new JTextField("", 10);
+		radiusex = new JTextField("0", 10);
 		radiusex.setCaretColor(Color.RED);
 		radiusex.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(radiusex);
 		speedLX = new JLabel("SpeedX");
 		panel.add(speedLX);
-		speedX = new JTextField("", 10);
+		speedX = new JTextField("0", 10);
 		speedX.setCaretColor(Color.RED);
 		speedX.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(speedX);
 		powSpeedX = new JLabel ("*10^");
 		panel.add(powSpeedX);
-		speedexX = new JTextField("", 10);
+		speedexX = new JTextField("0", 10);
 		speedexX.setCaretColor(Color.RED);
 		speedexX.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(speedexX);
 		speedLY = new JLabel("SpeedY");
 		panel.add(speedLY);
-		speedY = new JTextField("", 10);
+		speedY = new JTextField("29.783", 10);
 		speedY.setCaretColor(Color.RED);
 		speedY.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(speedY);
 		powSpeedY = new JLabel ("*10^");
 		panel.add(powSpeedY);
-		speedexY = new JTextField("", 10);
+		speedexY = new JTextField("3", 10);
 		speedexY.setCaretColor(Color.RED);
 		speedexY.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(speedexY);
 		XL = new JLabel ("X");
 		panel.add(XL);
-		X = new JTextField("", 10);
+		X = new JTextField("149597870000", 10);
 		X.setCaretColor(Color.RED);
 		X.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(X);
 		YL = new JLabel ("Y");
 		panel.add(YL);
-		Y = new JTextField("", 10);
+		Y = new JTextField("0", 10);
 		Y.setCaretColor(Color.RED);
 		Y.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(Y);
@@ -106,7 +106,8 @@ public class PlanetCreator extends ObjectCreationFrame {
 				curSpeedY = Double.parseDouble(speedY.getText())*(double)Math.pow(10, Double.parseDouble(speedexY.getText()));
 				curX = Double.parseDouble(X.getText());
 				curY = Double.parseDouble(Y.getText());
-				obj.add(new SpaceObject (curMass, curRadius, new Vector2 (curSpeedX, curSpeedY), new Vector2 (curX, curY)));
+				obj.add(new SpaceObject (curMass, curRadius, new Vector2 (curSpeedX, curSpeedY), new Vector2 (curX, curY), (int)curRadius));
+				System.out.println("Create planet " + curMass + " " + curSpeedX + " " + curSpeedY);
 			}
 
 			@Override

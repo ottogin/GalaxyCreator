@@ -7,7 +7,8 @@ public class PhysicsControl
 {
 
 	private double G = 6.67E-11;
-	private double dt = 1;
+	private double dt = 2E4;
+	
 	
 	ArrayList<SpaceObject> obj;
 	
@@ -17,23 +18,30 @@ public class PhysicsControl
 	}
 	
 	public void calcForce ()
-	{
+	{	
 		double forceX = 0;
 		double forceY = 0;
+		double force;
+		double d;
 		
 		for (SpaceObject i : obj)
 		{
+			i.getForce().SetZero();
 			for (SpaceObject j : obj)
 			{
-				if (i.getPos().x - j.getPos().x != 0)
-					forceX = G*i.getMass()*j.getMass()/Math.pow((i.getPos().x - j.getPos().x), 2);
-				if (i.getPos().y - j.getPos().y != 0)
-					forceY = G*i.getMass()*j.getMass()/Math.pow((i.getPos().y - j.getPos().y), 2);
-				if (i.getPos().x - j.getPos().x > 0)
-					forceX *= -1;
-				if (i.getPos().y - j.getPos().y > 0)
-					forceY *= -1;
-				System.out.println("X = "+ forceX +" Y = "+ forceY);
+				forceX = 0;
+				forceY = 0;
+				force = 0;
+				d = i.getPos().Distance(j.getPos());
+				if (d != 0){
+					force = G*i.getMass()*j.getMass()/Math.pow(d, 2);
+					if(j.getPos().x - i.getPos().x != 0)
+						forceX = force * ((j.getPos().x - i.getPos().x)/d);
+					if(j.getPos().y - i.getPos().y != 0)
+						forceY = force * ((j.getPos().y - i.getPos().y)/d);
+				}
+				//if (i.ImageNumber == 1)
+				//System.out.println("X = "+ i.getForce().x +" Y = "+ i.getForce().y);	
 				i.updateForce(forceX, forceY);
 			}
 		}
@@ -43,7 +51,7 @@ public class PhysicsControl
 	{
 		for (SpaceObject i : obj)
 		{
-			i.setAcceleration(new Vector2(i.getForce().x/i.getMass(), i.getForce().y/i.getMass()));
+			i.setAcceleration(i.getForce().x/i.getMass(), i.getForce().y/i.getMass());
 		}
 	}
 	

@@ -43,7 +43,7 @@ public class DataBase {
 		        {
 		        	//System.out.println("Find new planet..");
 		        	
-		        	SpaceObject obj = new SpaceObject(0, 0, null, null);
+		        	SpaceObject obj = new SpaceObject(0, 0, null, null, 1);
 		        	
 		            obj.setMass(Double.parseDouble(br.readLine()));
 		            obj.setRadius(Double.parseDouble(br.readLine()));
@@ -55,6 +55,11 @@ public class DataBase {
 		            space.getObjects().add(obj);
 		            
 		            i--;
+		        }
+		    	//System.out.println("Start loading.. " + i);
+		        for (SpaceObject j : space.getObjects())//Комментить цикл при добавлении планет + SpaceObject метод Draw
+		        {
+		            j.setMiddle(space.getObjects().get(1).getPos());//Ставить цифру для пересадки
 		        }
 		        System.out.println("Load successfully");
 		    } catch (FileNotFoundException e1) {

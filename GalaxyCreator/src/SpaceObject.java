@@ -1,8 +1,12 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import System.ImageLoader;
 import System.Vector2;
 
 
@@ -14,9 +18,19 @@ public class SpaceObject
 	Vector2 speedVector;
 	Vector2 forceVector;
 	Vector2 acceleration;
+	ArrayList<Vector2> trajectory;
+	String force;
+
+		
+	Vector2 midleobj;
+	int imgRad;
+	int counter;
 	
+	ImageLoader ImagesList;
 	int ImageNumber;
 	Image img;
+	
+	private double magicRconst = 827428000;
 	
 	public double getMass() {
 		return mass;
@@ -60,6 +74,15 @@ public class SpaceObject
 	public void setImageNumber (int num)
 	{
 		this.ImageNumber = num;
+		img = new ImageIcon(ImagesList.getName(num)).getImage();
+		if (num == 1)
+		{
+			imgRad = 60;
+		}
+		else 
+		{
+			imgRad = 30;
+		}
 	}
 	
 	public void updateForce (double dfx, double dfy)
@@ -73,14 +96,14 @@ public class SpaceObject
 	{
 		double Ax = acceleration.x;
 		double Ay = acceleration.y;
-		forceVector.SetValue(Ax + dax, Ay + day);
+		acceleration.SetValue(Ax + dax, Ay + day);
 	}
 	
 	public void updateSpeed (double dVx, double dVy)
 	{
 		double Vx = speedVector.x;
 		double Vy = speedVector.y;
-		forceVector.SetValue(Vx + dVx, Vy + dVy);
+		speedVector.SetValue(Vx + dVx, Vy + dVy);
 	}
 	
 	public void updateCoord (double dx, double dy)
@@ -90,9 +113,10 @@ public class SpaceObject
 		pos.SetValue(x + dx, y + dy);
 	}
 	
-	public void setAcceleration (Vector2 acceleration)
+	public void setAcceleration (double x, double y)
 	{
-		this.acceleration = acceleration;
+		acceleration.x = x;
+		acceleration.y = y;
 	}
 	
 	public Vector2 getAcceleration ()
@@ -100,24 +124,85 @@ public class SpaceObject
 		return acceleration;
 	}
 
-	public SpaceObject(double mass, double radius, Vector2 speedVector, Vector2 pos)
+	public void setMiddle (Vector2 midleobj)
+	{
+		this.midleobj = midleobj;
+	}
+	
+	public SpaceObject(double mass, double radius, Vector2 speedVector, Vector2 pos, int imn, Vector2 midleobj)
 	{
 		this.mass = mass;
 		this.radius = radius;
 		this.speedVector = speedVector;
 		this.pos = pos;
 		
+		ImagesList = new ImageLoader();
+		ImageNumber = imn;
+		img = new ImageIcon(ImagesList.getName(imn)).getImage();
+		this.midleobj = midleobj;
+		
+		Initialize();
+	}
+	
+	public SpaceObject(double mass, double radius, Vector2 speedVector, Vector2 pos, int imn)
+	{
+		this.mass = mass;
+		this.radius = radius;
+		this.speedVector = speedVector;
+		this.pos = pos;
+		
+		ImagesList = new ImageLoader();
+		ImageNumber = imn;
+		
+		img = new ImageIcon(ImagesList.getName(imn)).getImage();
+		
+		Initialize();
+	}
+	
+	public void Initialize()
+	{
 		forceVector = new Vector2();
 		forceVector.SetZero();
 		acceleration = new Vector2();
 		acceleration.SetZero();
 		
-		img = new ImageIcon("Earth.png").getImage();
+		ImagesList = new ImageLoader();
+		force = new String();
+
+
+		trajectory = new ArrayList<>();
+		
 	}
 	
-	public void Draw(Graphics2D g, Surface s)
+	/*public void Draw(Graphics2D g, Surface s) //Раскомментить, если без пересадки
 	{
-		g.drawImage(img, (int)pos.x, (int)pos.y, 50, 50, s);
+		trajectory.add (new Vector2 (pos.x, pos.y));
+		g.drawImage(img, (int)(pos.x/magicRconst)+450, (int)(pos.y/magicRconst)+350, 50, 50, s);
+		for (Vector2 i: trajectory)
+		{	
+			g.setColor(Color.RED);
+			g.drawLine((int)(i.x/magicRconst)+475, (int)(i.y/magicRconst)+375, (int)(i.x/magicRconst)+475, (int)(i.y/magicRconst)+375);
+		}
+	}*/
+	
+	public void Draw(Graphics2D g, Surface s)//Комменить, если без пересадки
+	{
+		g.drawImage(img, (int)((pos.x - midleobj.x)/magicRconst)+450, (int)((pos.y - midleobj.y)/magicRconst)+350, imgRad, imgRad, s);
+		trajectory.add (new Vector2 (pos.x - midleobj.x, pos.y - midleobj.y));
+		for (Vector2 i: trajectory)
+		{	
+			g.setColor(Color.RED);
+			g.drawLine((int)((i.x)/magicRconst)+450+imgRad/2, (int)((i.y)/magicRconst)+350+imgRad/2, (int)((i.x)/magicRconst)+450+imgRad/2, (int)((i.y)/magicRconst)+350+imgRad/2);
+		}
+	}
+	
+	public void DrawText(Graphics2D g, int height)
+	{
+		if (counter % 50 == 0)
+			force = "X = "+getForce().x+"    Y = "+getForce().y;
+		g.setColor(Color.WHITE);
+		g.drawString(force, 700, height);
+		counter++;
 	}
 	
 	
