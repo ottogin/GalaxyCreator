@@ -7,8 +7,8 @@ public class PhysicsControl
 {
 
 	private double G = 6.67E-11;
-	private double dt = 2E4;
-	
+	private double dt = 5E4;
+	private double NormalSpeed = 4E4;
 	
 	ArrayList<SpaceObject> obj;
 	
@@ -69,6 +69,13 @@ public class PhysicsControl
 		{
 			i.updateCoord(i.getSpeed().x*dt, i.getSpeed().y*dt);
 		}
+	}
+	
+	public void Stop(){
+		if(dt == 0)
+			dt = NormalSpeed;
+		else
+			dt = 0;
 	}
 	
 	public void calcPhysics ()

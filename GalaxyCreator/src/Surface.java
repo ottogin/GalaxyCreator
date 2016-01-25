@@ -20,7 +20,9 @@ class Surface extends JPanel implements ActionListener {
 	private Image mars;
 	private Timer timer;
 	Space space;
-	private final int DELAY = 10;
+	private int DELAY = 10;
+	private int DELAY_STEP = 1;
+	private int DELAY_HIGH_EDGE = 40;
 
 	public Surface(Space space) {
 		this.space = space;
@@ -30,7 +32,8 @@ class Surface extends JPanel implements ActionListener {
 	    timer.start();
 	}
 
-	private void loadImage() {
+	private void loadImage() 
+	{
 		background = new ImageIcon("Background.jpg").getImage();
 		earth = new ImageIcon("Earth.png").getImage();
 		sun = new ImageIcon("sun.png").getImage();
@@ -41,14 +44,33 @@ class Surface extends JPanel implements ActionListener {
 	private void setSurfaceSize() {
 
 		Dimension d = new Dimension();
-		d.width = 1200;
-		d.height = 690;
+		d.width = 1300;
+		d.height = 715;
 		setPreferredSize(d);
 	}
 	
 	public void setSpace(Space space)
 	{
 		this.space = space;
+	}
+	
+	public void incSpeed()
+	{
+		if(DELAY > DELAY_STEP)
+		{
+			DELAY -= DELAY_STEP;
+			timer.setDelay(DELAY);
+
+		}
+	}
+	
+	public void decSpeed()
+	{
+		if (DELAY_HIGH_EDGE > DELAY)
+		{
+			DELAY += DELAY_STEP;
+			timer.setDelay(DELAY);
+		}
 	}
 
 	private void doDrawing(Graphics g) {

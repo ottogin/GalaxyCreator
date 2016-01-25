@@ -76,16 +76,32 @@ public class PlanetCreator extends ObjectCreationFrame {
 		panel.add(speedexY);
 		XL = new JLabel ("X");
 		panel.add(XL);
-		X = new JTextField("149597870000", 10);
+		X = new JTextField("149", 10);
 		X.setCaretColor(Color.RED);
 		X.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(X);
+		
+		powXL = new JLabel("10^");
+		panel.add(powXL);
+		powX = new JTextField("9", 10);
+		powX.setCaretColor(Color.RED);
+		powX.setHorizontalAlignment(JTextField.LEFT);
+		panel.add(powX);
+		
 		YL = new JLabel ("Y");
 		panel.add(YL);
 		Y = new JTextField("0", 10);
 		Y.setCaretColor(Color.RED);
 		Y.setHorizontalAlignment(JTextField.LEFT);
 		panel.add(Y);
+		
+		powYL = new JLabel("10^");
+		panel.add(powYL);
+		powY = new JTextField("0", 10);
+		powY.setCaretColor(Color.RED);
+		powY.setHorizontalAlignment(JTextField.LEFT);
+		panel.add(powY);
+		
 		create = new JButton("Create");
 		panel.add(create);
 		setContentPane(panel);
@@ -104,8 +120,8 @@ public class PlanetCreator extends ObjectCreationFrame {
 				curRadius = Double.parseDouble(radius.getText())*(double)Math.pow(10, Double.parseDouble(radiusex.getText()));
 				curSpeedX = Double.parseDouble(speedX.getText())*(double)Math.pow(10, Double.parseDouble(speedexX.getText()));
 				curSpeedY = Double.parseDouble(speedY.getText())*(double)Math.pow(10, Double.parseDouble(speedexY.getText()));
-				curX = Double.parseDouble(X.getText());
-				curY = Double.parseDouble(Y.getText());
+				curX = Double.parseDouble(X.getText())*(double)Math.pow(10, Double.parseDouble(powX.getText()));
+				curY = Double.parseDouble(Y.getText())*(double)Math.pow(10, Double.parseDouble(powY.getText()));
 				obj.add(new SpaceObject (curMass, curRadius, new Vector2 (curSpeedX, curSpeedY), new Vector2 (curX, curY), (int)curRadius));
 				System.out.println("Create planet " + curMass + " " + curSpeedX + " " + curSpeedY);
 			}

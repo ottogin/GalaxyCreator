@@ -25,6 +25,7 @@ public class ImageLoader {
 			if(i == 2) 	return "Earth.png";
 			if(i == 3) 	return "Venera.png";
 			if(i == 4) 	return "Mars.png";
+			if(i == 5)	return "Uran.png";
 			return "Sun.png";
 		}
 }

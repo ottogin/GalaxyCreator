@@ -20,7 +20,9 @@ public class SpaceObject
 	Vector2 acceleration;
 	ArrayList<Vector2> trajectory;
 	String force;
+	boolean is_tracking;
 
+	Color color;
 		
 	Vector2 midleobj;
 	int imgRad;
@@ -30,7 +32,7 @@ public class SpaceObject
 	int ImageNumber;
 	Image img;
 	
-	private double magicRconst = 827428000;
+	private double magicRconst = 8E8;
 	
 	public double getMass() {
 		return mass;
@@ -81,8 +83,18 @@ public class SpaceObject
 		}
 		else 
 		{
-			imgRad = 30;
+			imgRad = 36;
 		}
+		if (num == 1)
+			color = new Color(255, 255, 0);
+		else if (num == 2)
+			color = new Color(0, 255, 0);
+		else if (num == 3)
+			color = new Color(255, 255, 240);
+		else if (num == 4)
+			color = new Color(255, 0, 0);
+		else 
+			color = new Color(100, 149, 237);
 	}
 	
 	public void updateForce (double dfx, double dfy)
@@ -129,19 +141,20 @@ public class SpaceObject
 		this.midleobj = midleobj;
 	}
 	
-	public SpaceObject(double mass, double radius, Vector2 speedVector, Vector2 pos, int imn, Vector2 midleobj)
+	public void setMiddle (float x, float y)
 	{
-		this.mass = mass;
-		this.radius = radius;
-		this.speedVector = speedVector;
-		this.pos = pos;
-		
-		ImagesList = new ImageLoader();
-		ImageNumber = imn;
-		img = new ImageIcon(ImagesList.getName(imn)).getImage();
-		this.midleobj = midleobj;
-		
-		Initialize();
+		this.midleobj.SetValue(x, y);
+	}
+	
+	public void clear_tr(){
+		trajectory.clear();
+	}
+	
+	public void ChangeTracking(){
+		if(is_tracking)
+			is_tracking = false;
+		else
+			is_tracking = true;
 	}
 	
 	public SpaceObject(double mass, double radius, Vector2 speedVector, Vector2 pos, int imn)
@@ -150,11 +163,20 @@ public class SpaceObject
 		this.radius = radius;
 		this.speedVector = speedVector;
 		this.pos = pos;
+		this.is_tracking = false;
+		midleobj = new Vector2(0, 0);
 		
 		ImagesList = new ImageLoader();
-		ImageNumber = imn;
-		
+		this.ImageNumber = imn;
 		img = new ImageIcon(ImagesList.getName(imn)).getImage();
+		if (imn == 1)
+		{
+			imgRad = 60;
+		}
+		else 
+		{
+			imgRad = 36;
+		}
 		
 		Initialize();
 	}
@@ -166,7 +188,7 @@ public class SpaceObject
 		acceleration = new Vector2();
 		acceleration.SetZero();
 		
-		ImagesList = new ImageLoader();
+		
 		force = new String();
 
 
@@ -174,34 +196,25 @@ public class SpaceObject
 		
 	}
 	
-	/*public void Draw(Graphics2D g, Surface s) //Раскомментить, если без пересадки
-	{
-		trajectory.add (new Vector2 (pos.x, pos.y));
-		g.drawImage(img, (int)(pos.x/magicRconst)+450, (int)(pos.y/magicRconst)+350, 50, 50, s);
-		for (Vector2 i: trajectory)
-		{	
-			g.setColor(Color.RED);
-			g.drawLine((int)(i.x/magicRconst)+475, (int)(i.y/magicRconst)+375, (int)(i.x/magicRconst)+475, (int)(i.y/magicRconst)+375);
-		}
-	}*/
 	
-	public void Draw(Graphics2D g, Surface s)//Комменить, если без пересадки
+	public void Draw(Graphics2D g, Surface s)
 	{
-		g.drawImage(img, (int)((pos.x - midleobj.x)/magicRconst)+450, (int)((pos.y - midleobj.y)/magicRconst)+350, imgRad, imgRad, s);
-		trajectory.add (new Vector2 (pos.x - midleobj.x, pos.y - midleobj.y));
+		if(is_tracking)	
+			trajectory.add (new Vector2 (pos.x - midleobj.x, pos.y - midleobj.y));
 		for (Vector2 i: trajectory)
 		{	
-			g.setColor(Color.RED);
-			g.drawLine((int)((i.x)/magicRconst)+450+imgRad/2, (int)((i.y)/magicRconst)+350+imgRad/2, (int)((i.x)/magicRconst)+450+imgRad/2, (int)((i.y)/magicRconst)+350+imgRad/2);
+			g.setColor(color);
+			g.drawLine((int)((i.x)/magicRconst)+550+imgRad/2, (int)((i.y)/magicRconst)+350+imgRad/2, (int)((i.x)/magicRconst)+550+imgRad/2, (int)((i.y)/magicRconst)+350+imgRad/2);
 		}
+		g.drawImage(img, (int)((pos.x - midleobj.x)/magicRconst)+550, (int)((pos.y - midleobj.y)/magicRconst)+350, imgRad, imgRad, s);
 	}
 	
 	public void DrawText(Graphics2D g, int height)
 	{
 		if (counter % 50 == 0)
-			force = "X = "+getForce().x+"    Y = "+getForce().y;
+			force = "X = "+ getForce().x +"    Y = "+ getForce().y;
 		g.setColor(Color.WHITE);
-		g.drawString(force, 700, height);
+		g.drawString(force, 800, height);
 		counter++;
 	}
 	

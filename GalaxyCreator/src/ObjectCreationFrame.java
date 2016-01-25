@@ -1,5 +1,7 @@
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +22,8 @@ public abstract class ObjectCreationFrame extends JFrame
 	JTextField speedexX;
 	JTextField speedexY;
 	JTextField X;
+	JTextField powX;
+	JTextField powY;
 	JTextField Y;
 	JLabel massL;
 	JLabel radiusL;
@@ -31,6 +35,8 @@ public abstract class ObjectCreationFrame extends JFrame
 	JLabel powRadius;
 	JLabel XL;
 	JLabel YL;
+	JLabel powXL;
+	JLabel powYL;
 	JButton create;
 	JPanel panel;
 	double curMass = 0;
@@ -48,6 +54,9 @@ public abstract class ObjectCreationFrame extends JFrame
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setSize(400, 300);
 		panel = new JPanel();
+		
+		//panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		panel.setLayout(new GridLayout(7, 4, 0,0));
 	}
 	
 	public abstract void ButtonInitialize();

@@ -36,7 +36,7 @@ public class DataBase {
 	public static Space load(){
 			Space space = new Space(500, 500);
 		    try {
-		    	BufferedReader br = new BufferedReader(new FileReader("Save.txt"));
+		    	BufferedReader br = new BufferedReader(new FileReader("Ellips.txt"));
 		    	int i = Integer.parseInt(br.readLine());
 		    	//System.out.println("Start loading.. " + i);
 		        while(i > 0)
@@ -57,10 +57,10 @@ public class DataBase {
 		            i--;
 		        }
 		    	//System.out.println("Start loading.. " + i);
-		        for (SpaceObject j : space.getObjects())//Комментить цикл при добавлении планет + SpaceObject метод Draw
-		        {
-		            j.setMiddle(space.getObjects().get(1).getPos());//Ставить цифру для пересадки
-		        }
+		       /*for (SpaceObject j : space.getObjects())//Р·Р°РєРѕРјРµРЅС‚РёС‚СЊ + SpaceObject пїЅпїЅпїЅпїЅпїЅ Draw
+		       {
+		            j.setMiddle(space.getObjects().get(0).getPos());//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		       }*/
 		        System.out.println("Load successfully");
 		    } catch (FileNotFoundException e1) {
 		            System.out.println("Can't read file <Save.txt>");
